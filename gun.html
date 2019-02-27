@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>枪</title>
+</head>
+
+<body>
+    <div onclick="play();" style="height: 10000px; text-align: center; padding-top: 40%; color: white; background-color: black;">
+        <h1>开枪</h1>
+    </div>
+    <audio id="audio" src="gun.wav"></audio>
+
+    <script type="text/javascript">
+        function play() {
+            console.log("点击");
+            document.getElementById("audio").play();
+        }
+    </script>
+</body>
+
+</html>
