@@ -1,0 +1,7 @@
+<div class="content gun-item-content" [ngStyle]="{'height': contentHeightStr}" (click)="playSound()">
+  <audio #sound></audio>
+  <button type="button" class="btn btn-sm btn-danger btn-block" (click)="goListPage()">返回</button>
+  <div [ngStyle]="{'padding-top': textTopStr}">
+    点击开枪
+  </div>
+</div>

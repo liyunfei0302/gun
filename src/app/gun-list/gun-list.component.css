@@ -1,0 +1,29 @@
+.content {
+  width: 100%;
+  background-color: #333333;
+}
+
+/*#content {*/
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*left: 0;*/
+  /*right: 0;*/
+  /*min-height: 100%;*/
+  /*width: 100%;*/
+  /*background-color: #333333;*/
+/*}*/
+
+.gun-row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.gun-card {
+  margin: 4% 4%;
+  height: 100px;
+  color: #333333;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 35px;
+}
