@@ -12,8 +12,6 @@ export class GunItemComponent implements OnInit, AfterViewInit {
   contentHeight: number;  // 内容高度
   contentHeightStr: string;  // 内容高度px
   textTopStr: string;  // 文字top高度px
-  scrollHeight: number; // 正文高度
-  clientWidth: number; // 可见高度
   @ViewChild('sound') audio: ElementRef;
   guns = SOUNDS;
 
@@ -23,11 +21,9 @@ export class GunItemComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.scrollHeight = document.body.scrollHeight;
-    this.clientWidth = document.body.clientWidth;
-    this.contentHeight = this.scrollHeight > this.clientWidth ? this.scrollHeight : this.clientWidth;
-    this.contentHeightStr = `${this.contentHeight}px`;
-    this.textTopStr = `${this.contentHeight / 2 - 20}px`;
+      this.contentHeight = document.body.scrollHeight;
+      this.contentHeightStr = `${this.contentHeight}px`;
+      this.textTopStr = `${this.contentHeight / 2 - 20}px`;
   }
 
   ngAfterViewInit() {

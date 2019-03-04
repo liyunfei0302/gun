@@ -19,10 +19,13 @@ export class GunListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.scrollHeight = document.body.scrollHeight;
-    this.clientWidth = document.body.clientWidth;
-    this.contentHeight = this.scrollHeight > this.clientWidth ? this.scrollHeight : this.clientWidth;
-    this.contentHeightStr = `${this.contentHeight}px`;
+    setTimeout(() => {
+      this.scrollHeight = document.body.scrollHeight;
+      this.clientWidth = document.body.clientWidth;
+      console.log(this.clientWidth, this.scrollHeight);
+      this.contentHeight = this.scrollHeight > this.clientWidth ? this.scrollHeight : this.clientWidth;
+      this.contentHeightStr = `${this.contentHeight}px`;
+    });
   }
 
   goItemPage(index: number) {

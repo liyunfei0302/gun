@@ -1,4 +1,4 @@
-<div class="content" [ngStyle]="{'height': contentHeightStr}">
+<div id="content" class="content" [ngStyle]="{'height': contentHeightStr}">
   <div class="gun-row row justify-content-center">
     <div class="gun-card card col-5" (click)="goItemPage(index)" *ngFor="let gun of guns; let index = index;">
       {{gun.name}}
