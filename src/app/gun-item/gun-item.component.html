@@ -1,7 +1,20 @@
-<div class="content gun-item-content" [ngStyle]="{'height': contentHeightStr}" (click)="playSound()">
-  <audio #sound></audio>
+<div class="header">
+  <audio #sound preload></audio>
   <button type="button" class="btn btn-sm btn-danger btn-block" (click)="goListPage()">返回</button>
-  <div [ngStyle]="{'padding-top': textTopStr}">
+  <button type="button" class="btn btn-sm btn-primary btn-block" (click)="singleModel()"
+          *ngIf="shotMode !== 'single'; else runningBtn">连发
+  </button>
+  <ng-template #runningBtn>
+    <button type="button" class="btn btn-sm btn-primary btn-block" (click)="runningFire()">单发</button>
+  </ng-template>
+  <div class="form-group" *ngIf="shotMode !== 'single'">
+    <label for="runningTime">连发次数</label>
+    <input class="form-control" id="runningTime" type="number" [min]="runningTimeMin" [max]="runningTimeMax"
+           [(ngModel)]="runningTime" (change)="setRunningTime()"/>
+  </div>
+</div>
+<div class="content gun-item-content" (click)="playSound()">
+  <div style="position: relative; top: 50%; transform: translateY(-50%)">
     点击开枪
   </div>
 </div>

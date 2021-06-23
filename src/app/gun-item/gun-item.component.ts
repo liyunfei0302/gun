@@ -9,38 +9,69 @@ import {SOUNDS} from '../app.constant';
 })
 export class GunItemComponent implements OnInit, AfterViewInit {
 
-  contentHeight: number;  // 内容高度
-  contentHeightStr: string;  // 内容高度px
-  textTopStr: string;  // 文字top高度px
   @ViewChild('sound') audio: ElementRef;
   guns = SOUNDS;
+
+  // 发射模式（单发、连发）
+  shotMode: 'single' | 'running' = 'single';
+  runningTime = 3; // 连发次数
+  runningTimeMax = 30; // 最高连发次数
+  runningTimeMin = 3; // 最低连发次数
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-      this.contentHeight = document.body.scrollHeight;
-      this.contentHeightStr = `${this.contentHeight}px`;
-      this.textTopStr = `${this.contentHeight / 2 - 20}px`;
+    if (navigator.vibrate) {
+      console.log("支持设备震动！");
+    }
   }
 
   ngAfterViewInit() {
-      this.route.params.subscribe((params) => {
-        this.audio.nativeElement.src = this.guns[params['index']].src;
-      });
+    this.route.params.subscribe((params) => {
+      this.audio.nativeElement.src = this.guns[params['index']].src;
+    });
   }
 
   /**
    * 播放声音
    * */
-  playSound() {
+  playSound(index?: number) {
     console.log('点击');
-    this.audio.nativeElement.play();
+    if (this.shotMode === 'running')
+      if (typeof index === 'number') {
+        if (index < this.runningTime)
+          setTimeout(() => this.playSound(++index), 150);
+      } else {
+        setTimeout(() => this.playSound(2), 150);
+      }
+    this.audio.nativeElement.pause();
+    this.audio.nativeElement.currentTime = 0;
+    setTimeout(() => {
+      this.audio.nativeElement.play();
+      setTimeout(() => {
+        navigator.vibrate([100]);
+      }, 300);
+    });
   }
 
   goListPage() {
     this.router.navigateByUrl('/');
+  }
+
+  singleModel() {
+    this.shotMode = 'single';
+  }
+
+  runningFire() {
+    this.shotMode = 'running';
+  }
+
+  setRunningTime() {
+    this.runningTime = this.runningTime > this.runningTimeMax ? this.runningTimeMax : this.runningTime;
+    this.runningTime = this.runningTime < this.runningTimeMin ? this.runningTimeMin : this.runningTime;
   }
 }
